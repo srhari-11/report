@@ -1,0 +1,1239 @@
+\documentclass[12pt,a4paper]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx} % Sets the document font to Times New Roman
+\usepackage{geometry}
+\geometry{a4paper, left=1.5in, right=1in, top=1in, bottom=1in}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{fancyhdr} % For text around borders (headers/footers)
+\usepackage{tikz}     % For drawing the double border
+\usepackage{eso-pic}  % For applying the border to every page
+
+% --- DOUBLE BORDER CONFIGURATION ---
+\usetikzlibrary{calc}
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[overlay,remember picture]
+    % Outer Thick Border (aligned close to margins)
+    \draw[line width=1.2pt] 
+         ($ (current page.north west) + (1.35in,-0.85in) $) 
+      rectangle 
+         ($ (current page.south east) + (-0.85in,0.85in) $);
+    % Inner Thin Border
+    \draw[line width=0.5pt] 
+         ($ (current page.north west) + (1.4in,-0.9in) $) 
+      rectangle 
+         ($ (current page.south east) + (-0.9in,0.9in) $);
+  \end{tikzpicture}
+}
+\documentclass[12pt]{report}
+
+% Packages
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{fancyhdr}
+
+% -------- HEADER & FOOTER SETUP --------
+\pagestyle{fancy}
+\fancyhf{} % clear default
+
+% Header
+\lhead{\footnotesize HEALMATE : ENHANCING MENTAL HEALTH WELL-BEING}
+\rhead{\footnotesize Mini Project Report}
+
+% Footer
+\lfoot{\scriptsize Department of Computer Science and Engineering}
+\rfoot{\scriptsize Thejus Engg college, Vellarakkad, Thrissur}
+\cfoot{\thepage}
+
+% Remove lines
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% -------- FIX FOR FIRST PAGE / CHAPTER PAGES --------
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \lhead{\footnotesize HEALMATE : ENHANCING MENTAL HEALTH WELL-BEING}
+    \rhead{\footnotesize Mini Project Report}
+    \lfoot{\scriptsize Department of Computer Science and Engineering}
+    \rfoot{\scriptsize Thejus Engg college, Vellarakkad, Thrissur}
+    \cfoot{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+
+
+% --- PLAIN MONOSPACE CODE STYLE ---
+\lstdefinestyle{mystyle}{
+    basicstyle=\ttfamily\scriptsize, % Reduced size to fit better
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none, % No line numbers                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    xleftmargin=0.5cm, % Added margin so it doesn't hug the border
+    xrightmargin=0.5cm
+}
+\lstset{style=mystyle}
+
+% Formatting Chapter Headings
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{15pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-10pt}{30pt}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+\onehalfspacing
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	FRONT MATTER (Roman Numeral Paging)
+%----------------------------------------------------------------------------------------
+\pagenumbering{roman}
+
+%---------------- TITLE PAGE ----------------%
+\begin{titlepage}
+\centering
+\thispagestyle{empty}
+
+\vspace*{1cm}  % reduced from 2cm (moves content up)
+
+{\Large \textbf{HEALMATE : ENHANCING MENTAL WELL-BEING}}\\[0.8cm]
+
+{\large \textbf{MINI PROJECT REPORT}}\\[1.2cm]
+
+\textbf{Submitted by}\\[0.4cm]
+
+\begin{center}
+LAKSHMIMAAYA A (TJE23CS043)\\
+NIHAS R S (TJE23CS061) \\
+SHIJIN SHAJI (TJE23CS072) \\
+SREEHARI P S (TJE23CS073) \\
+\end{center}{l}
+
+
+\vspace{1.2cm}
+
+{\normalsize in partial fulfillment for the award of the degree}\\[0.2cm]
+
+{\normalsize of}\\[0.2cm]
+
+{\large \textbf{BACHELOR OF TECHNOLOGY}}\\[0.2cm]
+
+{\normalsize in}\\[0.2cm]
+
+{\large \textbf{COMPUTER SCIENCE AND ENGINEERING}}\\[0.6cm]
+
+% -------- LOGO --------
+\includegraphics[width=2.8cm]{logo.jpeg}\\[0.8cm]
+
+{\large \textbf{THEJUS ENGINEERING COLLEGE}}\\[0.2cm]
+
+{\normalsize APJ ABDUL KALAM TECHNOLOGICAL UNIVERSITY}\\[1cm]
+
+{\large \textbf{March 2026}}
+
+\end{titlepage}
+%---------------- CERTIFICATE PAGE ----------------%
+%---------------- CERTIFICATE PAGE ----------------%
+\begin{document}
+
+\thispagestyle{fancy} % <-- IMPORTANT (forces header/footer + page number)
+
+\begin{center}
+
+{\Large \textbf{Department of Computer Science and Engineering}}\\
+{\Large \textbf{Thejus Engineering College, Thrissur}}\\[2mm]
+Vellarakkad, Thrissur - 680 584\\
+(http://www.thejusengg.ac.in)
+
+\vspace{0.7cm}
+
+% -------- LOGO --------
+\includegraphics[width=2.8cm]{logo.jpeg}
+
+\vspace{0.7cm}
+
+{\LARGE \textbf{\underline{CERTIFICATE}}}
+
+\end{center}
+
+\vspace{0.5cm}
+
+\setstretch{1.2}
+
+This is to certify that the report entitled
+\textbf{HEALMATE : ENHANCING MENTAL HEALTH WELL-BEING}
+submitted by \textbf{LAKSHMIMAAYA A (TJE23CS043) ,  NIHAS R S (TJE23CS061),
+SHIJIN SHAJI (TJE23CS072), and SREEHARI P S (TJE23CS073)}
+to the APJ Abdul Kalam Technological University in partial fulfillment
+of the B.Tech.\ degree in Computer Science and Engineering is a bonafide
+record of the project work carried out by them during the year
+2025--2026 under our guidance and supervision. This report in any
+form has not been submitted to any other University or Institute
+for any purpose.
+
+\vspace{1.4cm}
+
+\vspace{1.4cm}
+
+\noindent
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l r}
+
+\textbf{Ms. Jinsha C J} & \textbf{Ms. Heera B M} \\
+(Project Guide) & (Project Coordinator) \\
+Assistant Professor & Assistant Professor \\
+Dept. of CSE & Dept. of CSE \\
+Thejus Engineering College & Thejus Engineering College \\
+Thrissur & Thrissur \\
+
+\end{tabular*}
+
+\vspace{1.4cm}
+
+\begin{center}
+\textbf{Ms. Vinitha A V}\\
+Associate Professor and HOD\\
+Dept. of CSE\\
+Thejus Engineering College\\
+Thrissur
+\end{center}
+%---------------- ACKNOWLEDGEMENT ----------------%
+%---------------- ACKNOWLEDGEMENT ----------------%
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+We would like to express our sincere gratitude to all those who have supported and guided us throughout the successful completion of our mini project titled \textbf{“HealMate – Mental Health Support Website.”}
+
+First and foremost, we extend our heartfelt thanks to our project guide \textbf{Ms. Jinsha CJ}, Assistant Professor, Department of Computer Science and Engineering, Thejus Engineering College, for her valuable guidance, continuous encouragement, and support throughout the project.
+
+We also express our sincere thanks to \textbf{Ms. Vinitha A V}, Head of the Department of Computer Science and Engineering, Thejus Engineering College, for providing the necessary facilities and academic support required for the successful completion of this work.
+
+We are grateful to the college management for providing the infrastructure and learning environment needed for this project. We also thank our faculty members, friends, and classmates for their support, suggestions, and encouragement during the development of this project.
+
+Finally, we express our heartfelt gratitude to our family members for their constant support and motivation.
+
+\vspace{0.5cm}
+
+\begin{flushright}
+Lakshmimaaya.A\\
+Nihas.RS\\
+Shijin Shaji\\
+Sreehari.PS
+\end{flushright}
+
+%---------------- ABSTRACT ----------------%
+%---------------- ABSTRACT ----------------%
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Mental health has become a major concern in today’s fast-paced world, where individuals frequently experience stress, anxiety, and emotional imbalance due to academic pressure, work stress, and personal challenges. Access to proper mental health support is often limited because of factors such as high cost, lack of awareness, social stigma, and limited availability of professionals.
+
+To address these challenges, HealMate is developed as a web-based mental health support system that provides simple, accessible, and effective solutions for improving mental well-being. The system focuses on helping users maintain emotional balance through daily wellness activities, simple remedies, and self-care practices that can be easily followed in everyday life.
+
+HealMate includes features such as daily tasks, mood tracking, health insights, and expert guidance, enabling users to manage their mental health effectively. The platform is accessible anytime and anywhere through smartphones or computers, making it convenient and user-friendly.
+
+The system is developed using modern web technologies such as HTML, CSS, and JavaScript for the frontend, and Supabase for backend services including authentication, database management, and real-time communication.
+
+Overall, HealMate aims to make mental health care simple, affordable, and accessible while promoting self-awareness, stress management, and positive thinking, helping individuals lead a healthier and more balanced life.
+
+\newpage
+
+%---------------- CONTENTS ----------------%
+%---------------- CONTENTS ----------------%
+\tableofcontents
+
+\newpage
+%---------------- LIST OF FIGURES ----------------%
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+\newpage
+
+%---------------- SYMBOLS ----------------%
+%---------------- LIST OF SYMBOLS ----------------%
+\chapter*{List of Symbols}
+\addcontentsline{toc}{chapter}{List of Symbols}
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{Symbol / Term} & \textbf{Description} \\
+\hline
+UI & User Interface \\
+\hline
+UX & User Experience \\
+\hline
+HTML & HyperText Markup Language \\
+\hline
+CSS & Cascading Style Sheets \\
+\hline
+JS & JavaScript \\
+\hline
+DB & Database \\
+\hline
+API & Application Programming Interface \\
+\hline
+DFD & Data Flow Diagram \\
+\hline
+ER Diagram & Entity Relationship Diagram \\
+\hline
+Auth & Authentication \\
+\hline
+CRUD & Create, Read, Update, Delete \\
+\hline
+Supabase & Backend platform used for database, authentication, and APIs \\
+\hline
+PostgreSQL & Database system used in the project \\
+\hline
+User & General person using the HealMate system \\
+\hline
+Expert & Mental health professional providing guidance \\
+\hline
+Dashboard & Main interface where users access features \\
+\hline
+Chat Module & Communication system between user and expert \\
+\hline
+Wellness Activities & Daily tasks like breathing, yoga, etc. \\
+\hline
+Mood Tracker & Feature to track emotional state \\
+\hline
+Health Insights & Data-based feedback for user improvement \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+%	MAIN CONTENT (Arabic Numeral Paging)
+%----------------------------------------------------------------------------------------
+\clearpage
+\pagenumbering{arabic}
+
+%---------------- CHAPTER 1 ----------------%
+%---------------- CHAPTER 1 ----------------%
+\chapter{Introduction}
+
+\section{General Background}
+
+Mental health is a crucial component of overall well-being and plays an important role in shaping an individual’s quality of life. Just like physical health, mental health affects how a person thinks, feels, and behaves in daily life. In the modern world, people are increasingly exposed to stress due to academic pressure, work-related responsibilities, personal relationships, and social expectations. As a result, issues such as stress, anxiety, and emotional imbalance have become very common among individuals of all age groups.
+
+Despite the growing awareness about mental health, many people still neglect their emotional well-being. One of the major reasons for this is the lack of easily accessible and affordable mental health support systems. Traditional methods of mental health care, such as in-person counseling and therapy sessions, are often time-consuming and expensive. Moreover, these services may not be available in all locations, especially in rural or remote areas.
+
+Another important issue is the social stigma associated with mental health problems. Many individuals hesitate to seek help because they fear being judged or misunderstood by others. This leads to delayed intervention, which can worsen mental health conditions over time.
+
+With the rapid advancement of technology, web-based and mobile-based solutions have emerged as effective tools to address these challenges. Digital platforms provide an opportunity to deliver mental health support in a simple, accessible, and user-friendly manner. These platforms can offer daily guidance, self-care activities, and expert support without requiring physical presence.
+
+In this context, the project HealMate is developed as a mental health support website that aims to provide users with daily wellness activities, simple remedies, and easy access to professional guidance. The system focuses on promoting mental well-being through small, consistent actions that can be easily incorporated into daily routines.
+
+\section{Objective}
+
+The primary objective of the HealMate project is to develop a simple and effective web-based platform that supports users in managing their mental health. The system is designed to provide easy access to mental health resources and encourage users to maintain a healthy emotional state.
+
+The specific objectives of the project are as follows:
+
+\begin{itemize}
+\item To provide users with daily wellness activities such as breathing exercises, relaxation techniques, and mindfulness practices that help reduce stress and anxiety.
+\item To offer simple and practical remedies that users can follow in their daily life to improve their mental well-being.
+\item To create awareness about mental health and encourage users to adopt healthy self-care habits.
+\item To enable users to track their emotions and understand their mental state through features like mood tracking.
+\item To provide a platform where users can connect with mental health experts for guidance and support when needed.
+\item To design a user-friendly interface that can be easily used by individuals of different age groups without any technical difficulty.
+\item To make mental health support accessible anytime and anywhere through a web-based system.
+\end{itemize}
+
+Overall, the project aims to simplify mental health care and make it more approachable, affordable, and effective for everyone.
+
+\section{Problem Statement}
+
+In today’s fast-paced world, mental health issues have become a significant concern. A large number of people experience stress, anxiety, and emotional challenges in their daily lives. These problems can negatively affect their productivity, relationships, and overall quality of life.
+
+However, there are several challenges associated with existing mental health support systems. Firstly, professional mental health services such as counseling and therapy are not always easily accessible. In many cases, individuals have to travel long distances or wait for appointments to receive support. Secondly, the cost of therapy sessions can be high, making it difficult for many people to afford regular treatment.
+
+Another major issue is the lack of continuous support. Traditional systems usually provide assistance only during scheduled sessions, and users may not receive guidance in their daily lives. This creates a gap between professional help and everyday mental health management.
+
+Furthermore, social stigma plays a significant role in preventing people from seeking help. Many individuals feel uncomfortable discussing their mental health problems openly due to fear of judgment or misunderstanding. As a result, they often ignore their issues instead of addressing them.
+
+In addition to this, people tend to neglect daily self-care practices due to busy schedules and lack of awareness. Simple activities that can improve mental health, such as relaxation exercises and mindfulness practices, are often overlooked.
+
+Therefore, there is a strong need for a system that can provide continuous, affordable, and easily accessible mental health support. The solution should be simple to use, available at any time, and capable of guiding users in maintaining their mental well-being.
+
+The HealMate project is designed to address these challenges by offering a digital platform that provides daily support, guidance, and access to expert help in a convenient manner.
+
+\section{Scope}
+
+The scope of the HealMate project focuses on providing a comprehensive yet simple solution for improving mental health through a web-based platform. The system is designed to support users in their daily lives by offering various features related to mental well-being.
+
+The key areas covered under the scope of the project include:
+
+\begin{itemize}
+\item \textbf{Daily Wellness Activities:} The system provides activities such as breathing exercises, yoga, and stretching techniques that help users relax and reduce stress.
+\item \textbf{Simple Remedies:} Users can access easy remedies and suggestions that can be followed to improve emotional balance and mental health.
+\item \textbf{Mood Tracking:} The platform allows users to monitor their mood and emotional state, helping them understand patterns in their feelings.
+\item \textbf{Expert Support:} Users can connect with mental health experts for guidance, advice, and support when required.
+\item \textbf{Educational Content:} The system provides information about mental health, stress management, and self-care practices to increase awareness.
+\item \textbf{User-Friendly Interface:} The website is designed to be simple and easy to use so that users can navigate without confusion.
+\item \textbf{Accessibility:} The platform can be accessed anytime and anywhere using a smartphone or computer, making it highly convenient.
+\end{itemize}
+
+However, the project also has certain limitations. It is a web-based system and may require an internet connection for access. Also, while it provides guidance and support, it does not replace professional medical treatment in severe cases.
+
+Overall, the scope of HealMate is to provide a simple, accessible, and effective solution for daily mental health support and well-being.
+
+%---------------- CHAPTER 2 ----------------%
+\chapter{LITERATURE SURVEY}
+
+\begin{center}
+\textbf{Table 2.1: Literature Survey of Mental Health Systems (Part 1)}
+\end{center}
+
+\begin{table}[htbp]
+\centering
+\normalsize % <-- Increased size
+\setlength{\tabcolsep}{6pt} % wider spacing
+\renewcommand{\arraystretch}{1.5} % more row height
+
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+\textbf{Name of the Paper} & \textbf{Problem Tackled} & \textbf{Solutions Proposed} \\
+\hline
+
+Meditational Pathways of Mindfulness and Exercise on Mental Health
+& High stress levels and poor mental health among individuals.
+& Mindfulness, meditation, and regular exercise help reduce stress and improve overall mental well-being. \\
+\hline
+
+Nurturing the Mind: The Power of Positive Affirmation Enhancing Psychological Well-being
+& Negative thoughts, low self-esteem, and reduced psychological well-being.
+& Positive affirmations promote optimism, resilience, and improved mental health. \\
+\hline
+
+Importance of Self-Care in Promoting Mental Health and Well-Being
+& High stress and burnout negatively affecting mental health.
+& Encourages emotional awareness, relaxation practices, and healthy routines to improve well-being. \\
+\hline
+
+Design for Mobile Mental Health: An Exploratory Review
+& Lack of proper design guidelines and user-centered approaches in mental health apps.
+& Emphasizes user-centered design and accessibility to improve app effectiveness. \\
+\hline
+
+Affect Balance and Daily Emotional Experience
+& Imbalance between positive and negative emotions causing stress and instability.
+& Uses affect balance to understand emotional regulation and daily emotional experiences. \\
+\hline
+
+Psychological Well-being: Evidence Regarding its Causes and Consequences
+& Difficulty managing negative emotions and lack of focus on positive mental health.
+& Enhances psychological well-being through coping strategies and emotional development. \\
+\hline
+
+\end{tabularx}
+\end{table}
+
+
+\vspace{4cm}
+\begin{center}
+\textbf{Table 2.2: Literature Survey of Mental Health Systems (Part 2)}
+\end{center}
+
+\begin{table}[htbp]
+\centering
+\normalsize
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline
+\textbf{Name of the Paper} & \textbf{Problem Tackled} & \textbf{Solutions Proposed} \\
+\hline
+
+Design for Mobile Mental Health Applications
+& Lack of effective design strategies in mobile mental health systems.
+& Provides usability guidelines and design insights for effective applications. \\
+\hline
+
+Acceptance of Mobile Mental Health Treatment Applications
+& Low acceptance due to privacy, trust, and usability concerns.
+& User-centered design and evidence-based features improve adoption and engagement. \\
+\hline
+
+Promoting Positive Mental Health
+& Focus mainly on mental illness rather than emotional well-being and resilience.
+& Strengthens emotional well-being, coping skills, and preventive mental healthcare practices. \\
+\hline
+
+Regulation of Positive Emotion: Emotion Regulation Strategies that Promote Resilience
+& Poor emotional regulation during stressful situations.
+& Identifies strategies that enhance resilience and psychological well-being. \\
+\hline
+
+Public Health System–Delivered Mental Health Preventive Care Links to Reduction of Health Care Costs
+& Increasing healthcare costs and poor outcomes due to delayed mental health intervention.
+& Preventive mental healthcare reduces costs and improve outcomes. \\
+\hline
+
+The Importance of Social Support for Rural Mental Health
+& Limited access to care, stigma, and isolation in rural populations.
+& Community support, early screening, and continuous follow-up improve mental health outcomes. \\
+\hline
+
+\end{tabularx}
+\end{table}
+%---------------- CHAPTER 3 ----------------%
+%---------------- CHAPTER 3 ----------------%
+\chapter{System Requirement}
+
+\section{Introduction}
+
+System requirements define the necessary resources and conditions required for the successful development and operation of the HealMate system. These requirements include both hardware and software components that ensure the system functions efficiently and provides a smooth user experience.
+
+The HealMate website is designed as a lightweight and user-friendly web application. It does not require high-end hardware, making it accessible to a wide range of users. The system is built using modern web technologies and cloud-based backend services, which help in improving performance, scalability, and reliability.
+
+Understanding system requirements is important to ensure that the application runs without errors and provides consistent performance across different devices.
+
+%---------------- HARDWARE ----------------%
+\section{Hardware Requirements}
+
+The HealMate system does not require any specialized hardware. It is designed to work on standard devices that are commonly used by users.
+
+\subsection{For Development}
+\begin{itemize}
+\item \textbf{Processor:} Intel Core i3 or higher
+\item \textbf{RAM:} Minimum 4 GB (8 GB recommended)
+\item \textbf{Storage:} Minimum 256 GB
+\item \textbf{Internet Connection:} Required for development and testing
+\end{itemize}
+
+\subsection{For End Users}
+\begin{itemize}
+\item \textbf{Device:} Smartphone, Laptop, or Desktop Computer
+\item \textbf{Processor:} Basic processor capable of running a web browser
+\item \textbf{RAM:} Minimum 2 GB
+\item \textbf{Internet Connection:} Required to access the website
+\end{itemize}
+
+The system is optimized to work on low to moderate hardware configurations, ensuring accessibility for a large number of users.
+
+%---------------- SOFTWARE ----------------%
+\section{Software Requirements}
+
+The HealMate system uses a combination of frontend and backend technologies to provide a complete web-based solution.
+
+\subsection{Frontend Technologies}
+\begin{itemize}
+\item \textbf{HTML (HyperText Markup Language):} Used to design the structure of web pages.
+\item \textbf{CSS (Cascading Style Sheets):} Used to style and format the user interface.
+\item \textbf{JavaScript:} Used to add interactivity and dynamic behavior to the website.
+\end{itemize}
+
+\subsection{Backend \& Services}
+\begin{itemize}
+\item \textbf{Supabase:} Used as the backend service for authentication, database, and real-time features.
+\item \textbf{API Integration:} Enables communication between frontend and backend.
+\end{itemize}
+
+\subsection{Database}
+\begin{itemize}
+\item \textbf{PostgreSQL (via Supabase):} Used to store user data, mood tracking data, chat history, and other information securely.
+\end{itemize}
+
+\subsection{Tools \& Platforms}
+\begin{itemize}
+\item Web Browser (Google Chrome, Edge, etc.)
+\item Code Editor (VS Code or any IDE)
+\item Internet connection for deployment and usage
+\end{itemize}
+
+These technologies were selected because they are simple, efficient, and suitable for developing a user-friendly web application.
+
+%---------------- FUNCTIONAL ----------------%
+\section{Functional Requirements}
+
+Functional requirements describe what the system should do and the features it must provide to users.
+
+The HealMate system includes the following functionalities:
+
+\begin{itemize}
+\item \textbf{User Registration and Login:} Users can create an account and log in securely to access the system.
+\item \textbf{Daily Wellness Activities:} The system provides activities such as breathing exercises, yoga, and stretching.
+\item \textbf{Mood Tracking:} Users can track their emotions and monitor their mental state.
+\item \textbf{Remedies Section:} Provides simple remedies to reduce stress and improve well-being.
+\item \textbf{Expert Support:} Users can connect with mental health experts for guidance.
+\item \textbf{Chat Feature:} Enables communication between users and experts.
+\item \textbf{Educational Content:} Provides information about mental health awareness and stress management.
+\end{itemize}
+
+These features help users maintain mental wellness in a simple and effective way.
+
+%---------------- NON FUNCTIONAL ----------------%
+\section{Non-Functional Requirements}
+
+Non-functional requirements define how the system performs rather than what it does.
+
+\begin{itemize}
+\item \textbf{Performance:} The system should load quickly and respond without delay.
+\item \textbf{Usability:} The interface should be simple, clear, and easy to navigate.
+\item \textbf{Scalability:} The system should support an increasing number of users.
+\item \textbf{Security:} User data should be stored securely using authentication mechanisms.
+\item \textbf{Availability:} The system should be accessible anytime and anywhere.
+\item \textbf{Reliability:} The system should function properly without crashes.
+\end{itemize}
+
+%---------------- CONSTRAINTS ----------------%
+\section{System Constraints}
+
+System constraints are limitations that affect the design and implementation of the project.
+
+\begin{itemize}
+\item The system requires an internet connection to function.
+\item It is a web-based platform, so performance depends on browser compatibility.
+\item The project uses limited resources suitable for a mini project.
+\item It does not replace professional medical treatment in critical cases.
+\end{itemize}
+
+%---------------- SUMMARY ----------------%
+\section{Summary}
+
+The system requirements define the necessary hardware and software components needed for the development and operation of HealMate. The project is designed to be simple, accessible, and efficient, ensuring that users can easily access mental health support without requiring complex resources.
+
+%---------------- CHAPTER 4 ----------------%
+%---------------- CHAPTER 4 ----------------%
+\chapter{System Development}
+
+\section{Existing System}
+
+The existing system for mental health support mainly depends on traditional methods such as in-person counseling, therapy sessions, and occasional guidance from professionals. While these methods are effective, they have several limitations that make them less accessible and less convenient for many users.
+
+Most mental health services require individuals to visit hospitals or counseling centers physically. This creates difficulty for people who live in remote areas, have busy schedules, or are not comfortable traveling frequently. In addition, booking appointments and waiting for sessions can take a significant amount of time.
+
+Another major issue is the high cost of therapy sessions. Many people cannot afford regular counseling due to financial constraints. This makes mental health support inaccessible to a large section of society.
+
+The availability of trained professionals is also limited. In many regions, especially rural areas, there are not enough mental health experts, which leads to long waiting times and delays in receiving help.
+
+The existing system also lacks continuous daily guidance. Users only receive support during scheduled sessions, and there is no system to help them manage stress or emotions on a daily basis. This results in inconsistency in mental health care.
+
+Additionally, due to social stigma, many people hesitate to seek help. They feel uncomfortable discussing their mental health issues openly and fear being judged by others. This prevents them from taking proper care of their mental well-being.
+
+%---------------- DISADVANTAGES ----------------%
+%---------------- DISADVANTAGES ----------------%
+\subsection{Disadvantages of Existing System}
+
+\begin{itemize}
+
+\item \textbf{Requires physical presence for counseling sessions:}  
+Traditional mental health systems often require individuals to visit clinics or hospitals in person to receive counseling. This can be inconvenient for people with busy schedules, mobility issues, or those living far from healthcare facilities.
+
+\item \textbf{Expensive and not affordable for everyone:}  
+Mental health services, including therapy sessions and consultations, can be costly. Many individuals, especially those from low-income backgrounds, may find it difficult to afford continuous treatment or professional help.
+
+\item \textbf{Limited availability of mental health professionals:}  
+There is a shortage of qualified mental health professionals in many regions. This leads to long waiting times for appointments and reduces the chances of timely intervention and support.
+
+\item \textbf{Time-consuming due to appointments and travel:}  
+Booking appointments, waiting for scheduled sessions, and traveling to healthcare centers consume significant time. This discourages individuals from seeking help regularly.
+
+\item \textbf{No daily support or continuous guidance:}  
+Traditional systems typically provide support only during scheduled sessions. There is little to no continuous monitoring or daily guidance, which is crucial for managing ongoing mental health conditions.
+
+\item \textbf{Lack of awareness about self-care practices:}  
+Many individuals are not educated about mental health or self-care techniques such as stress management, mindfulness, or emotional regulation, limiting their ability to cope independently.
+
+\item \textbf{Social stigma prevents people from seeking help:}  
+In many societies, mental health issues are still stigmatized. Fear of judgment or discrimination prevents individuals from openly seeking professional help or discussing their problems.
+
+\item \textbf{Not easily accessible in rural or remote areas:}  
+Mental health facilities are often concentrated in urban areas. People living in rural or remote locations face significant challenges in accessing proper care due to distance, lack of infrastructure, and limited resources.
+
+\end{itemize}
+%---------------- PROPOSED SYSTEM ----------------%
+\section{Proposed System}
+
+To overcome the limitations of the existing system, we propose HealMate, a web-based mental health support system designed to provide easy, affordable, and accessible mental wellness solutions.
+
+HealMate focuses on providing daily wellness activities, simple remedies, and mental health support through a user-friendly platform. The system allows users to access mental health resources anytime and anywhere using a smartphone or computer.
+
+The proposed system includes features such as daily tasks, mood tracking, health insights, expert consultation, and self-care tips. These features help users maintain emotional balance and improve their mental well-being in a simple and effective way.
+
+One of the key advantages of HealMate is its ease of use. The interface is designed to be simple so that users of all age groups can easily navigate and use the system without any difficulty.
+
+The system also provides continuous support, unlike traditional methods. Users can engage in daily activities and track their progress regularly, which helps in maintaining consistency in mental health care.
+
+Another important feature is the Expert Module, which allows users to connect with mental health professionals for guidance and support when needed. This bridges the gap between users and professionals.
+
+The system is also cost-effective, making it accessible to a larger audience. It reduces the dependency on expensive therapy sessions by providing basic support and guidance through digital means.
+
+Overall, HealMate aims to make mental health care simple, affordable, and accessible, encouraging users to take small and consistent steps toward better mental health.
+
+%---------------- ADVANTAGES ----------------%
+%---------------- ADVANTAGES ----------------%
+%---------------- ADVANTAGES ----------------%
+\subsection{Advantages}
+
+\begin{itemize}
+
+\item The HealMate system provides easy access to mental health support anytime and anywhere, allowing users to receive guidance without the need to visit hospitals or clinics. This ensures that individuals can manage their mental well-being conveniently using their personal devices, making support more flexible and available whenever required.
+
+\item The system offers daily wellness activities and reminders that help users maintain a regular routine for mental well-being. These activities include breathing exercises, relaxation techniques, and mindfulness practices, which are simple to follow and can be easily incorporated into everyday life for better emotional balance.
+
+\item Another important advantage of the HealMate system is its ability to reduce stress and anxiety by providing guided activities and practical solutions. These features help users calm their minds during difficult situations and improve their overall mental condition through consistent practice.
+
+\item The application is designed with a user-friendly interface that is simple and easy to understand, making it suitable for users of all age groups. Even individuals with limited technical knowledge can navigate the system without confusion, which increases usability and user engagement.
+
+\item HealMate is a cost-effective solution compared to traditional therapy methods, as it reduces the need for expensive counseling sessions. This makes mental health support more affordable and accessible to a wider group of users, including students and individuals with limited financial resources.
+
+\item The system provides continuous support through regular user interaction and engagement. Unlike traditional methods that offer support only during specific sessions, HealMate ensures that users receive ongoing assistance and motivation to maintain their mental health consistently.
+
+\item Another advantage of the system is that it encourages self-awareness and positive thinking by helping users understand their emotions through features like mood tracking and affirmations. This helps users develop a more positive mindset and improve their emotional stability over time.
+
+\item The platform also allows users to connect with mental health experts, enabling them to receive professional guidance whenever necessary. This ensures that users are not completely dependent on self-help methods and can seek expert advice when required.
+
+\item HealMate helps users save time by eliminating the need for physical visits to therapy centers or hospitals. All services are available online, allowing users to access mental health support from the comfort of their home without spending extra time on travel.
+
+\item Finally, the system promotes healthy mental habits in daily life by encouraging users to practice small and consistent activities. These habits gradually improve mental well-being and help users build better emotional resilience in the long term.
+
+\end{itemize}
+
+%---------------- MODULES ----------------%
+\section{Modules}
+
+The HealMate system is divided into different modules to ensure smooth functioning, better organization, and an improved user experience. Each module is designed to perform a specific function, making the system more efficient, scalable, and easy to manage.
+
+%---------------- USER MODULE ----------------%
+\subsection{User Module}
+
+The User Module acts as the primary interface between the system and the users. It allows users to register and log in securely using their credentials, ensuring safe access to the platform. Once logged in, users can explore various features such as wellness activities, mood tracking, remedies, and self-care tips, all of which are designed to support their mental well-being.
+
+This module also manages user-related data efficiently, including personal details and activity history. It is designed with a simple and user-friendly interface so that users of all age groups can easily navigate through the system without confusion. Overall, the User Module plays a central role in enabling interaction and ensuring a smooth user experience.
+
+%---------------- EXPERT MODULE ----------------%
+\subsection{Expert Module}
+
+The Expert Module is specifically designed for mental health professionals who provide guidance and support to users. Through this module, experts can log in to the system, manage their profiles, and interact with users who seek professional help. It allows experts to share advice, suggestions, and recommendations based on the user’s needs.
+
+In addition, this module supports communication features such as chat or consultation, which helps in establishing a direct connection between users and professionals. This ensures that users receive reliable and expert-level assistance whenever required, enhancing the overall effectiveness of the system.
+
+%---------------- WELLNESS MODULE ----------------%
+\subsection{Wellness Activities Module}
+
+The Wellness Activities Module focuses on providing users with simple and effective activities that promote relaxation and mental well-being. It includes exercises such as breathing techniques, yoga practices, and stretching routines that help in reducing stress and improving focus.
+
+These activities are designed to be easy to follow and suitable for daily use, allowing users to incorporate them into their routine without difficulty. Regular participation in these activities helps users maintain emotional balance, improve concentration, and develop a healthier lifestyle over time.
+
+%---------------- REMEDIES MODULE ----------------%
+\subsection{Remedies Module}
+
+The Remedies Module provides practical solutions and techniques that help users manage stress, anxiety, and emotional imbalance in their daily life. It includes simple remedies that can be easily followed without requiring any special resources or professional assistance.
+
+This module is particularly useful for handling everyday mental health challenges, as it offers quick and effective ways to improve emotional stability. By following these remedies regularly, users can develop better coping strategies and maintain a balanced state of mind.
+
+%---------------- SELF CARE ----------------%
+\subsection{Self-Care Tips Module}
+
+The Self-Care Tips Module is designed to encourage users to adopt healthy habits that support their mental well-being. It provides daily tips and suggestions related to lifestyle, relaxation, and emotional care, which are simple yet effective.
+
+These tips help users stay motivated and remind them to take care of their mental health regularly. By following these suggestions, users can build positive routines and improve their overall quality of life in a gradual and consistent manner.
+
+%---------------- EDUCATIONAL ----------------%
+\subsection{Educational Content Module}
+
+The Educational Content Module provides valuable information related to mental health, stress management, and emotional well-being. It helps users understand different aspects of mental health and increases awareness about the importance of self-care.
+
+This module also plays a significant role in reducing the stigma associated with mental health issues by educating users and promoting open understanding. By gaining knowledge through this module, users can make informed decisions and take better steps toward maintaining their mental health.
+
+
+%---------------- CHAPTER 5 ----------------%
+\chapter{System Design}
+
+\section{System Architecture}
+
+The system architecture of the HealMate platform is designed as a layered model consisting of the Presentation Layer (Frontend), Backend Services, and Data Layer. This architecture integrates general users and experts into a unified web-based system that supports mental health monitoring, expert interaction, and real-time communication. The structure ensures smooth data flow, scalability, and efficient system performance across web environments.
+
+At the top level, the system includes two primary entities: General Users and Experts. General users include students and individuals seeking mental health support, while experts include professionals and doctors who provide guidance and consultation. Both entities interact with the system through the web-based frontend interface.
+
+\subsection{Presentation Layer (Frontend)}
+
+The presentation layer is implemented as a responsive web interface using HTML, CSS, and JavaScript. It serves as the primary interaction point between users and the HealMate website. The interface is designed to be user-friendly and accessible across different devices such as desktops, tablets, and smartphones.
+
+The frontend provides separate access for users and experts through authentication modules. General users can register and log in using the user authentication system, while experts access the platform through a dedicated expert authentication module.
+
+After successful login, users are directed to the User Home Dashboard, which includes features such as daily tasks, mood tracking, health insights, and access to the expert hub. These features allow users to monitor their mental health and interact with the platform effectively.
+
+Experts are provided with an Expert Dashboard that enables them to manage their profiles, receive appointment requests, and communicate with users through a real-time chat interface. The frontend also includes a Wellness and Education section that offers guided meditation, yoga exercises, and mental health awareness content.
+
+The presentation layer communicates with backend services using web APIs, ensuring that user interactions are processed dynamically and responses are displayed in real time.
+
+\subsection{Backend Services}
+
+The backend of the system is implemented using Supabase services, which provide the necessary infrastructure for handling web-based application logic and server-side operations. It manages authentication, data processing, and communication between different components of the system.
+
+The backend ensures secure user and expert authentication and manages user sessions. It also handles data exchange between the frontend and the database through APIs.
+
+A key feature of the backend is real-time communication, which enables instant messaging between users and experts through web-based chat functionality. It supports both individual user chat and expert communication services. Additional backend features include storage services, edge functions for server-side execution, and database interaction services.
+
+The backend also supports user management, chat management, and appointment scheduling, ensuring smooth operation of all platform functionalities.
+
+\subsection{Data Layer}
+
+The data layer is implemented using PostgreSQL provided by Supabase. It is responsible for storing and managing all website data in a structured format. The database includes tables for user profiles, expert profiles, authentication details, health metrics such as sleep, water intake, and calorie tracking, appointment records, and chat message history.
+
+The database design ensures proper relationships between tables, enabling efficient data retrieval and consistency. Security mechanisms such as controlled access and data protection are implemented to ensure user privacy and data integrity.
+
+\subsection{Architecture Workflow}
+
+The workflow of the HealMate website begins when a user or expert interacts with the web interface. The request is sent to the backend services through APIs. The backend processes the request, performs operations such as authentication or data handling, and communicates with the database to retrieve or update information.
+
+After processing, the backend sends the response back to the frontend, where it is displayed dynamically to the user. Real-time services ensure that chat communication between users and experts occurs instantly without delay. This continuous interaction between the frontend, backend, and database ensures smooth and efficient functioning of the website.
+
+\subsection{Advantages of System Architecture}
+
+The layered architecture of the HealMate website offers several advantages. It ensures clear separation between frontend, backend, and data layers, improving system organization and maintainability. The architecture supports scalability, allowing the website to handle a growing number of users and data efficiently.
+
+It enables real-time communication, enhancing user experience by providing instant interaction with experts. Secure authentication and data handling mechanisms ensure user privacy and protection. Overall, the architecture provides a reliable, flexible, and efficient framework for delivering mental health support services through a web-based platform.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{arch.jpeg}
+\caption{System architecture of Healmate}
+\label{fig:system_architecture}
+\end{figure}
+
+%---------------- 5.2 ----------------%
+\section{Data Flow Diagram (DFD)}
+
+Data Flow Diagram (DFD) is a graphical representation used to show how data moves within the system. It helps in understanding the flow of information between different components.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{df.jpeg}
+\caption{Data flow diagram of Healmate}
+\label{fig:system_architecture}
+\end{figure}
+
+
+%---------------- LEVEL 0 ----------------%
+\subsection{Level 0 DFD (Context Diagram)}
+
+The Level 0 DFD represents the entire system as a single process. It shows interactions between external entities and the system.
+
+The main external entities are:
+\begin{itemize}
+\item Users
+\item Experts
+\end{itemize}
+
+Users provide inputs such as login details, mood data, and activity selections. Experts provide guidance and communicate with users. The system processes these inputs and stores them in the database.
+
+Outputs include wellness suggestions, chat responses, and health insights.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{df0.jpeg}
+\caption{Level 0 DFD}
+\label{fig:system_architecture}
+\end{figure}
+
+%---------------- LEVEL 1 ----------------%
+\subsection{Level 1 DFD}
+
+The Level 1 DFD provides a detailed breakdown of the system into smaller processes.
+
+\begin{itemize}
+\item \textbf{Authentication Process:} Handles user login and registration.
+\item \textbf{User Dashboard Process:} Displays personalized content and insights.
+\item \textbf{Wellness Activities Process:} Provides mental health activities.
+\item \textbf{Expert Interaction Process:} Enables communication between users and experts.
+\item \textbf{Database Process:} Manages storage and retrieval of data.
+\end{itemize}
+
+These processes are connected through data flows, showing how information moves within the system.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{df1.jpeg}
+\caption{Level 1 DFD}
+\label{fig:system_architecture}
+\end{figure}
+\newpage
+
+%---------------- IMPORTANCE ----------------%
+\subsection{Importance of DFD}
+
+\begin{itemize}
+\item Helps in visualizing system processes
+\item Improves understanding of data flow
+\item Assists in identifying system issues
+\item Supports better system design and development
+\end{itemize}
+
+DFD plays an important role in effectively designing and documenting the HealMate system.
+
+%---------------- CHAPTER 6 ----------------%
+\chapter{Implementation, Results and Performance Evaluation}
+
+%---------------- 6.1 ----------------%
+\section{System Implementation}
+
+The implementation phase of the HealMate system focuses on transforming the designed architecture into a fully functional web application. The system is developed using HTML, CSS, and JavaScript for the frontend, while Supabase is used as the backend platform. Supabase provides authentication, database management, real-time services, and API integration.
+
+The frontend of the HealMate system is designed with a user-friendly interface that allows users to easily navigate through features such as daily wellness activities, mood tracking, health insights, and expert support. The interface is simple, clean, and suitable for users of all age groups. Proper alignment, color combinations, and readable fonts are used to enhance user experience.
+
+On the backend side, Supabase handles user authentication, data storage, and real-time communication. User credentials are securely stored and verified using authentication services. The database is implemented using PostgreSQL, with tables for user details, expert information, chat messages, and wellness data.
+
+The system also includes real-time chat functionality, allowing users to communicate instantly with experts. APIs are used to connect frontend and backend, ensuring smooth data transfer.
+
+Overall, the implementation ensures that the system is efficient, responsive, and secure.
+
+%---------------- 6.2 ----------------%
+\section{System Analysis}
+
+System analysis evaluates how effectively the HealMate system meets its objectives and user requirements. It includes analysis of functionality, usability, performance, and reliability.
+
+The system provides continuous mental health support through features such as mood tracking, daily tasks, and expert guidance. These features are tested under different conditions to ensure correct functioning and meaningful output.
+
+Usability analysis shows that the system is easy to use, even for first-time users. Navigation is simple, and users can access features without confusion.
+
+The system also ensures data security. User data is stored securely, and authentication mechanisms prevent unauthorized access.
+
+Performance analysis shows that the system responds quickly to user actions such as loading pages and sending messages. Supabase enhances performance through optimized queries and real-time updates.
+
+%---------------- TESTING ----------------%
+\subsection{Testing Analysis}
+
+Testing is performed to ensure that all components function correctly. Different testing methods are used to identify and fix errors.
+
+\begin{itemize}
+\item \textbf{Functional Testing:} Verifies features such as login, mood tracking, and chat functionality.
+\item \textbf{Usability Testing:} Ensures that the interface is easy to use and user-friendly.
+\item \textbf{Error Handling:} Checks system response to invalid inputs and unexpected conditions.
+\end{itemize}
+
+%---------------- UNIT TESTING ----------------%
+\subsection{Unit Testing}
+
+Unit testing involves testing individual modules separately. Each module such as authentication, mood tracking, and chat is tested independently.
+
+The purpose is to ensure that each component functions correctly. For example, the login module is tested for valid and invalid inputs.
+
+Unit testing helps identify bugs early and simplifies debugging.
+
+%---------------- SYSTEM TESTING ----------------%
+\subsection{System Testing}
+
+System testing is conducted after integrating all modules. The complete system is tested as a whole.
+
+Interactions between modules are verified to ensure smooth data flow. For example, after login, the correct dashboard and user data should be displayed.
+
+System testing also evaluates performance under multiple users to ensure stability.
+
+\newpage
+
+%---------------- IMPLEMENTATION ----------------%
+\vspace{2.5cm}
+\section{Implementation}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{imp1.jpeg}
+\caption{Official Login Page of Healmate}
+\label{fig:impl1}
+\end{figure}
+
+\vspace{3cm}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{imp2.jpeg}
+\caption{Official User Sign-in Page}
+\label{fig:impl2}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{imp3.jpeg}
+\caption{Home Page of Healmate}
+\label{fig:impl2}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{imp4.jpeg}
+\caption{Features}
+\label{fig:impl1}
+\end{figure}
+
+\newpage
+%---------------- 6.3 ----------------%
+\section{Performance Analysis}
+
+Performance analysis evaluates the system based on speed, efficiency, and scalability.
+
+The HealMate system provides fast response to user actions such as page loading and message delivery. Supabase improves performance through optimized database operations and real-time communication.
+
+Scalability ensures that the system can handle an increasing number of users without performance issues.
+
+Reliability is maintained through consistent performance and minimal downtime. Regular monitoring and optimization help maintain system efficiency.
+
+Overall, the system is efficient, reliable, and capable of delivering a smooth user experience.
+\newpage
+%-----------RESULT--------------
+\section{Result}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{re1.jpeg}
+\caption{User Expert Page}
+\label{fig:system_architecture}
+\end{figure}
+\noindent\textbf{Figure 6.5:} This interface is used by users to connect with experts. It allows users to browse available experts, view their details, and initiate communication for assistance.
+
+\vspace{0.5cm}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{re2.jpeg}
+\caption{ Experts Home Page}
+\label{fig:system_architecture}
+\end{figure}
+
+
+
+\noindent\textbf{Figure 6.6:} This interface is used by experts to connect with users. It enables experts to manage user requests, view appointments, and respond to users efficiently.
+\newpage
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{r2.jpeg}
+\caption{Daily Analysis Page}
+\label{fig:system_architecture}
+\end{figure}
+
+\noindent
+The Daily Analysis Page enables users to monitor and evaluate their essential health parameters, including water intake, sleep patterns, and calorie consumption. It also provides a built-in calorie calculator to assist users in managing their dietary intake effectively. By presenting these metrics in an organized and user-friendly manner, the system helps users gain better insights into their daily habits. This continuous monitoring and analysis contribute to maintaining a balanced lifestyle and promoting improved mental well-being.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{r3.jpeg}
+\caption{Users Realtime Chat}
+\label{fig:system_architecture}
+\end{figure}
+
+\noindent
+The Real-Time Chat Page enables users to communicate instantly within the system, facilitating effective interaction and support. This feature is implemented using Supabase, which provides real-time database synchronization and seamless message exchange. Users can send and receive messages without delay, ensuring a smooth and responsive communication experience. This real-time interaction enhances user engagement and provides immediate assistance, thereby contributing to improved user satisfaction and overall system effectiveness.
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{r4.jpeg}
+\caption{User's Symptoms Selection Page}
+\label{fig:system_architecture}
+\end{figure}
+
+\noindent
+This module enables users to systematically track their symptoms and receive personalized recommendations based on the identified conditions. The system processes the input data to generate appropriate plans that support the user's overall well-being. Furthermore, it incorporates a Daily Guide feature that allows users to maintain a comprehensive profile chart by recording their daily activities and health-related metrics. All user data is securely stored in the database, facilitating efficient retrieval and long-term analysis. In addition, the module provides an option for users to connect with professional guides through the available contact details, ensuring timely assistance and continuous support.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{r5.png}
+\caption{User's Symptoms Selection Page}
+\label{fig:system_architecture}
+\end{figure}
+\noindent
+The Exercise Module provides users with a structured platform to engage in physical fitness activities that support overall health and well-being. It offers a variety of exercise categories, including cardio workouts, strength training, flexibility and balance exercises, as well as outdoor and mind-body activities. Each category is designed to cater to different fitness levels and user preferences. By encouraging regular physical activity, the module helps users improve their physical fitness, reduce stress, and enhance mental well-being. The integration of guided exercise options ensures a user-friendly experience and promotes consistency in maintaining a healthy lifestyle.
+
+%---------------- CHAPTER 7 ----------------%
+\chapter{Conclusion and Future Scope}
+
+%---------------- 7.1 ----------------%
+\section{Conclusion}
+
+The HealMate project has been successfully developed as a web-based mental health support system with the primary aim of helping individuals manage stress, anxiety, and emotional imbalance in a simple, effective, and user-friendly manner. In today’s fast-moving world, where people are constantly exposed to various pressures such as academic stress, professional workload, personal responsibilities, and social expectations, maintaining good mental health has become a major challenge. The HealMate system addresses this issue by providing a structured and accessible platform that encourages users to take small but consistent steps toward improving their emotional well-being.
+
+One of the most significant achievements of the HealMate system is its ability to provide continuous support to users in their daily life. Unlike traditional mental health systems that focus mainly on periodic counseling sessions, HealMate emphasizes the importance of daily self-care practices. By offering features such as wellness activities, simple remedies, and mood tracking, the system ensures that users remain engaged in maintaining their mental health on a regular basis. This continuous support plays a crucial role in preventing the escalation of mental health issues and promotes a healthier lifestyle.
+
+Another important aspect of the system is its accessibility and convenience. HealMate is designed as a web-based application that can be accessed anytime and anywhere using a smartphone, tablet, or computer. This eliminates the need for physical visits to counseling centers and reduces dependency on location-based services. As a result, users from different regions, including rural and remote areas, can benefit from mental health support without difficulty.
+
+The simplicity and ease of use of the system also contribute to its effectiveness. The interface is designed in a clean and user-friendly manner so that individuals of all age groups can easily use the platform without technical knowledge. Navigation through different features is straightforward, ensuring a smooth user experience.
+
+HealMate also promotes self-awareness among users. Through features like mood tracking and health insights, users can analyze their emotional patterns over time. This helps them identify factors affecting their mental state and take proactive steps to improve their well-being.
+
+Cost-effectiveness is another major advantage. Traditional therapy services can be expensive, but HealMate provides an affordable alternative with valuable guidance and support. This makes mental health care accessible to a wider audience.
+
+The inclusion of expert support enhances the system further. Users can connect with professionals whenever needed, ensuring proper guidance in critical situations. This combination of self-help and expert support makes HealMate a comprehensive solution.
+
+The project successfully addresses key limitations of existing systems such as lack of accessibility, high cost, limited availability of professionals, and absence of daily guidance. It bridges the gap between professional care and daily self-care practices.
+
+Furthermore, the system encourages positive behavioral changes by promoting healthy habits like mindfulness, relaxation, and stress management. Over time, these contribute to improved emotional balance and overall well-being.
+
+In conclusion, the HealMate project achieves its objective of making mental health care simple, accessible, and effective. It demonstrates how technology can improve quality of life and support long-term mental wellness.
+
+%---------------- 7.2 ----------------%
+\section{Future Scope}
+
+Although the HealMate system provides a strong foundation for mental health support, there are many opportunities for future improvements.
+
+One major enhancement is the development of a dedicated mobile application. A mobile app can provide a more personalized experience with features such as push notifications, offline access, and better user interaction.
+
+Integration of artificial intelligence (AI) can further improve the system. AI can analyze user behavior and mood patterns to provide personalized recommendations, making the system more effective.
+
+The platform can also include interactive features such as guided meditation videos, audio sessions, and gamified activities. These features can increase user engagement and motivation.
+
+Improving data security and privacy is another important area. Advanced encryption and secure authentication methods can be implemented to protect sensitive user data.
+
+The expert module can be enhanced with features like appointment scheduling, video consultations, and detailed expert profiles. This will improve communication between users and professionals.
+
+Integration with wearable devices such as smartwatches can provide additional health data like heart rate and sleep patterns. This can help in offering better insights and recommendations.
+
+The system can also support multiple languages to reach a wider audience and improve accessibility for users from different regions.
+
+Community-based features such as forums and support groups can be added to allow users to share experiences and support each other.
+
+Advanced analytics and reporting can help users track their progress and stay motivated. Experts can also use this data to provide better guidance.
+
+Future collaborations with healthcare organizations can improve the credibility and reach of the system.
+
+Regular updates based on user feedback and technological advancements will ensure that the system remains efficient and user-friendly.
+
+In conclusion, the future scope of HealMate is wide and promising. With continuous improvements and integration of advanced technologies, it has the potential to become a powerful platform for mental health support and well-being.
+
+%---------------- REFERENCES ----------------%
+\documentclass[12pt]{report}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+
+% Increase spacing to expand pages
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+
+\begin{document}
+
+% -------------------- REFERENCES --------------------
+
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
+
+\begin{enumerate}
+
+\item K. R. R. Kumara, M. A. H. N. Madushanka, and S. A. P. Kumara,  
+“Mobile Application for Mental Health Using Machine Learning,” IEEE Xplore, 2022.  
+This paper discusses the integration of machine learning techniques in mental health applications, focusing on predictive analysis and personalized user support systems.
+
+\item A. R. Patil,  
+“Mental Health Companion Application,” ResearchGate, 2023.  
+This study presents the development of a digital platform aimed at providing emotional support, self-care practices, and user interaction features.
+
+\item S. R. Stoyanov et al.,  
+“Users’ Needs for Mental Health Apps Quality Evaluation,” JMIR mHealth and uHealth, 2025.  
+This paper evaluates user expectations and quality standards required for effective mental health applications.
+
+\item World Health Organization (WHO),  
+“Mental Health and Well-being,” 2022.  
+This report discusses global mental health challenges and highlights the importance of accessible and affordable mental health solutions.
+
+\item American Psychological Association (APA),  
+“Stress Management Techniques,” 2021.  
+This resource provides insights into stress reduction strategies and practical techniques to improve mental well-being.
+
+\item National Institute of Mental Health (NIMH),  
+“Digital Mental Health Tools,” 2023.  
+This publication explains the benefits of online mental health platforms and the role of technology in improving access to care.
+
+\item K. R. R. Kumara, M. A. H. N. Madushanka, and S. A. P. Kumara, 
+“Mobile Application for Mental Health Using Machine Learning,” IEEE Xplore, 2022.\\
+Available: \texttt{https://ieeexplore.ieee.org/document/10025036} \\
+This paper presents a mental health mobile application that integrates machine learning techniques to analyze user data and provide personalized recommendations. It focuses on predicting mental health conditions and offering intelligent support systems to improve user well-being.
+
+\item A. R. Patil, 
+“Mental Health Companion Application,” ResearchGate, 2023.\\
+This study describes the design and development of a mental health companion app that provides emotional support, self-care activities, and interactive features. It aims to help users manage stress and improve mental wellness through accessible digital tools.
+
+\item S. R. Stoyanov et al., 
+“Users’ Needs for Mental Health Apps Quality Evaluation,” JMIR mHealth and uHealth, 2025.\\
+Available: \texttt{https://mhealth.jmir.org/2025/1/e64622} \\
+This paper evaluates the expectations and requirements of users for mental health applications. It highlights the importance of usability, reliability, privacy, and evidence-based content in ensuring the effectiveness and acceptance of such apps.
+
+\item World Health Organization (WHO), 
+“Mental Health and Well-being,” 2022.\\
+This report discusses global mental health challenges, including stress, anxiety, and depression, and emphasizes the need for accessible and affordable mental health care solutions worldwide.
+
+\item American Psychological Association (APA), 
+“Stress Management Techniques,” 2021.\\
+This source provides detailed information on various stress management techniques such as relaxation methods, cognitive strategies, and lifestyle changes that help improve overall mental health.
+
+\item National Institute of Mental Health (NIMH), 
+“Digital Mental Health Tools,” 2023.\\
+This paper explains how digital tools like mobile apps and online platforms are used to support mental health care, improve accessibility, and provide timely interventions for users.
+
+\item K. M. Walsh, B. J. Saab, and N. A. S. Farb, 
+“Effects of a Mindfulness Meditation App on Subjective Well-Being,” JMIR Mental Health, 2019.\\
+Available: \texttt{https://mental.jmir.org/2019/1/e10844} \\
+This study examines the impact of a mindfulness meditation app on users’ well-being. It shows that regular use of such apps can reduce stress, enhance emotional balance, and improve overall life satisfaction.
+
+\item W. W. S. Mak, A. C. Y. Tong, et al., 
+“Efficacy of Mobile App-Based Mindfulness Training on Mental Health,” JMIR Mental Health, 2018.\\
+Available: \texttt{https://preprints.jmir.org/preprint/8597} \\
+This paper evaluates the effectiveness of mobile-based mindfulness training programs. It demonstrates that these interventions can significantly improve mental health by reducing anxiety and promoting positive thinking.
+
+\item M. Mikolasek, C. M. Witt, and J. Barth, 
+“Mindfulness and Relaxation App for Mental Health,” JMIR Cancer, 2021.\\
+Available: \texttt{https://cancer.jmir.org/2021/1/e16785} \\
+This research focuses on the use of mindfulness and relaxation apps for individuals dealing with stress and health-related challenges. It highlights how such apps can support emotional well-being and coping strategies.
+
+\item X. Zhang et al., 
+“Effects of Mobile Mindfulness Meditation on Mental Health of Students: A Meta-analysis,” Journal of Medical Internet Research, 2023.\\
+Available: \texttt{https://www.jmir.org/2023/1/e39128} \\
+This meta-analysis reviews multiple studies on mindfulness meditation apps used by students. It concludes that these apps are effective in reducing stress, anxiety, and improving concentration and emotional health.
+
+\item J. Smith et al., 
+“Virtual Mindfulness Interventions to Promote Well-Being: A Systematic Review,” Journal of Affective Disorders, 2022.\\
+This paper reviews various virtual mindfulness interventions and their role in improving psychological well-being. It highlights their effectiveness in managing stress and promoting mental resilience.
+
+\item L. A. Burke et al., 
+“Self-Care Interventions and Mental Health Outcomes: A Review Study,” Journal of Behavioral Health, 2020.\\
+This study explores different self-care practices such as physical activity, relaxation, and emotional awareness, showing how they contribute to improved mental health and reduced burnout.
+
+\item R. Baumeister et al., 
+“Positive Affirmations and Psychological Well-being,” Psychological Science, 2018.\\
+This paper discusses how positive affirmations can influence thoughts and behavior, helping individuals improve self-esteem, reduce negative thinking, and enhance overall psychological well-being.
+
+\item J. J. Gross, 
+“Emotion Regulation: Current Status and Future Prospects,” Psychological Inquiry, 2015.\\
+This study explains various emotion regulation strategies and their importance in managing stress and maintaining mental balance in daily life.
+
+\item D. Creswell, 
+“Mindfulness Interventions and Psychological Well-being: Mechanisms and Applications,” Annual Review of Psychology, 2017.\\
+This paper provides an overview of mindfulness-based interventions, explaining how they work and how they can be applied to improve mental health and emotional stability.
+
+\end{enumerate}
+
+
+\newpage
+\ClearShipoutPictureBG  % <-- THIS removes border from this page onward
+
+\thispagestyle{empty}   % optional (removes header/footer)
+
+\vspace*{\fill}
+
+\begin{flushright}
+\includegraphics[width=2.5cm]{logo.jpeg} \\[0.5cm]
+\textbf{Department of Computer Science and Engineering} \\[6pt]
+Thejus Engineering College \\[4pt]
+Vellarakkad, Thrissur - 680 584 \\[4pt]
+\texttt{(http://www.thejusengg.ac.in)}
+\end{flushright}
+
+\end{document}
