@@ -1035,6 +1035,7 @@ The Daily Analysis Page enables users to monitor and evaluate their essential he
 The Real-Time Chat Page enables users to communicate instantly within the system, facilitating effective interaction and support. This feature is implemented using Supabase, which provides real-time database synchronization and seamless message exchange. Users can send and receive messages without delay, ensuring a smooth and responsive communication experience. This real-time interaction enhances user engagement and provides immediate assistance, thereby contributing to improved user satisfaction and overall system effectiveness.
 \newpage
 \begin{figure}[h]
+\vspace{3.5cm}%adjust 
 \centering
 \includegraphics[width=0.6\textwidth]{r4.jpeg}
 \caption{User's Symptoms Selection Page}
@@ -1044,14 +1045,7 @@ The Real-Time Chat Page enables users to communicate instantly within the system
 \noindent
 This module enables users to systematically track their symptoms and receive personalized recommendations based on the identified conditions. The system processes the input data to generate appropriate plans that support the user's overall well-being. Furthermore, it incorporates a Daily Guide feature that allows users to maintain a comprehensive profile chart by recording their daily activities and health-related metrics. All user data is securely stored in the database, facilitating efficient retrieval and long-term analysis. In addition, the module provides an option for users to connect with professional guides through the available contact details, ensuring timely assistance and continuous support.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{r5.png}
-\caption{User's Symptoms Selection Page}
-\label{fig:system_architecture}
-\end{figure}
-\noindent
-The Exercise Module provides users with a structured platform to engage in physical fitness activities that support overall health and well-being. It offers a variety of exercise categories, including cardio workouts, strength training, flexibility and balance exercises, as well as outdoor and mind-body activities. Each category is designed to cater to different fitness levels and user preferences. By encouraging regular physical activity, the module helps users improve their physical fitness, reduce stress, and enhance mental well-being. The integration of guided exercise options ensures a user-friendly experience and promotes consistency in maintaining a healthy lifestyle.
+
 
 %---------------- CHAPTER 7 ----------------%
 \chapter{Conclusion and Future Scope}
