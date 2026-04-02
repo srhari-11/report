@@ -115,6 +115,8 @@
 
 {\Large \textbf{HEALMATE : ENHANCING MENTAL WELL-BEING}}\\[0.8cm]
 
+\vspace{0.7cm}
+
 {\large \textbf{MINI PROJECT REPORT}}\\[1.2cm]
 
 \textbf{Submitted by}\\[0.4cm]
@@ -124,10 +126,10 @@ LAKSHMIMAAYA A (TJE23CS043)\\
 NIHAS R S (TJE23CS061) \\
 SHIJIN SHAJI (TJE23CS072) \\
 SREEHARI P S (TJE23CS073) \\
-\end{center}{l}
+\end{center}{}
 
 
-\vspace{1.2cm}
+\vspace{0.7cm}
 
 {\normalsize in partial fulfillment for the award of the degree}\\[0.2cm]
 
@@ -152,8 +154,7 @@ SREEHARI P S (TJE23CS073) \\
 %---------------- CERTIFICATE PAGE ----------------%
 %---------------- CERTIFICATE PAGE ----------------%
 \begin{document}
-
-\thispagestyle{fancy} % <-- IMPORTANT (forces header/footer + page number)
+\thispagestyle{empty}  
 
 \begin{center}
 
@@ -215,6 +216,9 @@ Thrissur
 \end{center}
 %---------------- ACKNOWLEDGEMENT ----------------%
 %---------------- ACKNOWLEDGEMENT ----------------%
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
 \chapter*{Acknowledgement}
 \addcontentsline{toc}{chapter}{Acknowledgement}
 
@@ -990,6 +994,159 @@ Reliability is maintained through consistent performance and minimal downtime. R
 
 Overall, the system is efficient, reliable, and capable of delivering a smooth user experience.
 \newpage
+\section{Supabase Configuration}
+
+The following JavaScript code is used to configure and initialize the connection between the web application and the Supabase backend service.
+
+\subsection{Code Implementation}
+
+\begin{verbatim}
+const SUPABASE_URL = "https://your-project-url.supabase.co";
+const SUPABASE_KEY = "your-anon-public-key";
+
+const supabaseClient = (typeof supabase !== "undefined")
+  ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
+
+window.supabaseClient = supabaseClient;
+\end{verbatim}
+
+\subsection{Explanation}
+
+This code establishes a connection to the Supabase backend by defining two important constants: the Supabase project URL and the public API key. These credentials are required to authenticate and interact with the database. The code then checks whether the Supabase library is loaded in the application using a conditional statement. If the library is available, a client instance is created using the \texttt{createClient()} method; otherwise, it assigns a null value to prevent errors. Finally, the Supabase client is attached to the global \texttt{window} object, making it accessible throughout the application. This allows other modules, such as sleep, water, and calorie tracking components, to perform database operations like insert, select, and delete using a single shared client instance.
+
+\section{Real-Time Chat Logic Implementation}
+
+The following JavaScript code implements the core functionality of the real-time chat system using Supabase as the backend service. Important sections of the code are highlighted for better understanding.
+
+\subsection{Key Code Snippets}
+
+\begin{verbatim}
+// Supabase Client Initialization (IMPORTANT)
+const supabaseUrl = "https://your-project-url.supabase.co";
+const supabaseKey = "your-anon-key";
+const { createClient } = supabase;
+const db = createClient(supabaseUrl, supabaseKey);
+
+
+// Send Message to Database (IMPORTANT)
+async function sendMessage() {
+  const username = document.getElementById("username").value.trim();
+  const content = document.getElementById("message").value.trim();
+  if (!username || !content) return;
+
+  await db.from("chat_messages").insert([{ username, content }]);
+
+  document.getElementById("message").value = "";
+}
+
+
+// Load Messages from Database (IMPORTANT)
+async function loadMessages() {
+  const { data } = await db
+    .from("chat_messages")
+    .select("*")
+    .order("created_at", { ascending: true });
+
+  data.forEach(msg => addMessage(msg.id, msg.username, msg.content));
+}
+
+
+// Delete Message (IMPORTANT)
+async function deleteMessage(id) {
+  await db.from("chat_messages").delete().eq("id", id);
+}
+
+
+// Real-Time Updates using Subscription (VERY IMPORTANT)
+db.channel("chat-messages-channel")
+  .on(
+    "postgres_changes",
+    { event: "INSERT", schema: "public", table: "chat_messages" },
+    (payload) => addMessage(payload.new.id, payload.new.username, payload.new.content)
+  )
+  .on(
+    "postgres_changes",
+    { event: "DELETE", schema: "public", table: "chat_messages" },
+    (payload) => document.querySelector(`[data-id='${payload.old.id}']`)?.remove()
+  )
+  .subscribe();
+\end{verbatim}
+
+\subsection{Explanation of Key Components}
+
+The chat system is built using Supabase to enable real-time communication between users. The Supabase client initialization is a critical step that connects the frontend application to the backend database. The \texttt{sendMessage()} function allows users to send messages, which are stored in the \texttt{chat\_messages} table. The \texttt{loadMessages()} function retrieves existing messages from the database and displays them in chronological order. The \texttt{deleteMessage()} function enables users to remove their messages from the database. The most important feature of this system is the real-time subscription mechanism, which listens for database changes such as new message insertions and deletions. This ensures that all users see updates instantly without refreshing the page, making the chat system dynamic and interactive.
+
+\subsection{Highlighted Features}
+
+\begin{itemize}
+\item Real-time messaging using database subscriptions
+\item Instant UI updates without page refresh
+\item Message deletion functionality
+\item Dynamic DOM manipulation for chat display
+\item Backend integration using Supabase
+\end{itemize}
+\section{Health Tracking Module}
+
+The provided JavaScript code implements a health tracking module in a web application using Supabase as the backend service. This module includes tracking for sleep, water intake, and calorie consumption. The \texttt{saveSleep()} function collects user input for date and sleep duration, validates the fields, and stores the data in the \texttt{sleep\_tracker} database table. Similarly, water and calorie tracking functions store daily intake data in their respective tables. Each module updates a progress indicator based on predefined health goals and refreshes the displayed data dynamically. The \texttt{loadSleep()} function retrieves stored sleep records, displays them in a list with delete options, and prepares data for visualization by passing recent entries to a chart-rendering function. Equivalent loading functions are used for water and calorie data. The \texttt{deleteSleep(id)} function allows users to remove specific entries, and similar delete operations are implemented for other health parameters. Overall, this system provides an efficient way to record, manage, and visualize multiple aspects of daily health, helping users maintain better lifestyle habits.
+
+\subsection{Sleep Tracking Code Implementation}
+
+\begin{verbatim}
+async function saveSleep(){
+
+let date=sleepDate.value
+let hours=parseFloat(sleepHours.value)
+
+if(!date||!hours) return alert("Fill fields")
+
+await supabaseClient
+.from("sleep_tracker")
+.insert([{date:date,hours:hours}])
+
+updateProgress(hours,8,"sleepBar")
+
+loadSleep()
+
+}
+
+async function loadSleep(){
+
+const {data}=await supabaseClient
+.from("sleep_tracker")
+.select("*")
+.order("date")
+
+let list=document.getElementById("sleepList")
+list.innerHTML=""
+
+let labels=[],values=[]
+
+data.forEach(row=>{
+
+list.innerHTML+=`<li>${row.date} : ${row.hours} hrs 
+<button onclick="deleteSleep('${row.id}')">Delete</button></li>`
+
+labels.push(row.date)
+values.push(row.hours)
+
+})
+
+drawChart("sleepChart",labels.slice(-7),values.slice(-7),"Sleep")
+
+}
+
+async function deleteSleep(id){
+
+await supabaseClient
+.from("sleep_tracker")
+.delete()
+.eq("id",id)
+
+loadSleep()
+
+}
+\end{verbatim}
 %-----------RESULT--------------
 \section{Result}
 
@@ -1001,7 +1158,7 @@ Overall, the system is efficient, reliable, and capable of delivering a smooth u
 \end{figure}
 \noindent\textbf{Figure 6.5:} This interface is used by users to connect with experts. It allows users to browse available experts, view their details, and initiate communication for assistance.
 
-\vspace{0.5cm}
+\newpage
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{re2.jpeg}
@@ -1012,7 +1169,6 @@ Overall, the system is efficient, reliable, and capable of delivering a smooth u
 
 
 \noindent\textbf{Figure 6.6:} This interface is used by experts to connect with users. It enables experts to manage user requests, view appointments, and respond to users efficiently.
-\newpage
 
 \begin{figure}[h]
 \centering
@@ -1023,8 +1179,10 @@ Overall, the system is efficient, reliable, and capable of delivering a smooth u
 
 \noindent
 The Daily Analysis Page enables users to monitor and evaluate their essential health parameters, including water intake, sleep patterns, and calorie consumption. It also provides a built-in calorie calculator to assist users in managing their dietary intake effectively. By presenting these metrics in an organized and user-friendly manner, the system helps users gain better insights into their daily habits. This continuous monitoring and analysis contribute to maintaining a balanced lifestyle and promoting improved mental well-being.
+\newpage
 
 \begin{figure}[h]
+\vspace{1cm}
 \centering
 \includegraphics[width=0.6\textwidth]{r3.jpeg}
 \caption{Users Realtime Chat}
@@ -1033,9 +1191,8 @@ The Daily Analysis Page enables users to monitor and evaluate their essential he
 
 \noindent
 The Real-Time Chat Page enables users to communicate instantly within the system, facilitating effective interaction and support. This feature is implemented using Supabase, which provides real-time database synchronization and seamless message exchange. Users can send and receive messages without delay, ensuring a smooth and responsive communication experience. This real-time interaction enhances user engagement and provides immediate assistance, thereby contributing to improved user satisfaction and overall system effectiveness.
-\newpage
-\begin{figure}[h]
-\vspace{3.5cm}%adjust 
+
+\begin{figure}[h] 
 \centering
 \includegraphics[width=0.6\textwidth]{r4.jpeg}
 \caption{User's Symptoms Selection Page}
