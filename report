@@ -231,10 +231,10 @@ Finally, we express our heartfelt gratitude to our family members for their cons
 \vspace{0.5cm}
 
 \begin{flushright}
-Lakshmimaaya.A\\
-Nihas.RS\\
-Shijin Shaji\\
-Sreehari.PS
+\textbf{Lakshmimaaya.A}\\
+\textbf{Nihas.RS}\\
+\textbf{Shijin Shaji}\\
+\textbf{Sreehari.PS}
 \end{flushright}
 
 %---------------- ABSTRACT ----------------%
@@ -1109,11 +1109,7 @@ Regular updates based on user feedback and technological advancements will ensur
 In conclusion, the future scope of HealMate is wide and promising. With continuous improvements and integration of advanced technologies, it has the potential to become a powerful platform for mental health support and well-being.
 
 %---------------- REFERENCES ----------------%
-\documentclass[12pt]{report}
 
-\usepackage[a4paper, margin=1in]{geometry}
-\usepackage{setspace}
-\usepackage{hyperref}
 
 % Increase spacing to expand pages
 \setlength{\parskip}{1em}
