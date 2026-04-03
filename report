@@ -119,13 +119,13 @@
 
 {\large \textbf{MINI PROJECT REPORT}}\\[1.2cm]
 
-\textbf{Submitted by}\\[0.4cm]
+\normalsize{Submitted by}\\[0.4cm]
 
 \begin{center}
-LAKSHMIMAAYA A (TJE23CS043)\\
-NIHAS R S (TJE23CS061) \\
+\textbf{LAKSHMIMAAYA A (TJE23CS043)}\\
+NIHAS R S  (TJE23CS061) \\
 SHIJIN SHAJI (TJE23CS072) \\
-SREEHARI P S (TJE23CS073) \\
+SREEHARI P S (TJE23CS073)\\
 \end{center}{}
 
 
@@ -177,11 +177,8 @@ Vellarakkad, Thrissur - 680 584\\
 \vspace{0.5cm}
 
 \setstretch{1.2}
-
-This is to certify that the report entitled
-\textbf{HEALMATE : ENHANCING MENTAL HEALTH WELL-BEING}
-submitted by \textbf{LAKSHMIMAAYA A (TJE23CS043) ,  NIHAS R S (TJE23CS061),
-SHIJIN SHAJI (TJE23CS072), and SREEHARI P S (TJE23CS073)}
+This is to certify that the report entitled \textbf{HEALMATE : ENHANCING MENTAL HEALTH WELL-BEING} submitted by \textbf{LAKSHMIMAAYA A (TJE23CS043)}, NIHAS R S (TJE23CS061) ,
+SHIJIN SHAJI (TJE23CS072), and SREEHARI P S (TJE23CS073)
 to the APJ Abdul Kalam Technological University in partial fulfillment
 of the B.Tech.\ degree in Computer Science and Engineering is a bonafide
 record of the project work carried out by them during the year
@@ -236,9 +233,9 @@ Finally, we express our heartfelt gratitude to our family members for their cons
 
 \begin{flushright}
 \textbf{Lakshmimaaya.A}\\
-\textbf{Nihas.RS}\\
-\textbf{Shijin Shaji}\\
-\textbf{Sreehari.PS}
+Nihas R S\\
+Shijin Shaji\\
+Sreehari P S\\
 \end{flushright}
 
 %---------------- ABSTRACT ----------------%
@@ -452,6 +449,7 @@ Psychological Well-being: Evidence Regarding its Causes and Consequences
 
 
 \vspace{4cm}
+
 \begin{center}
 \textbf{Table 2.2: Literature Survey of Mental Health Systems (Part 2)}
 \end{center}
@@ -1063,12 +1061,14 @@ db.channel("chat-messages-channel")
   .on(
     "postgres_changes",
     { event: "INSERT", schema: "public", table: "chat_messages" },
-    (payload) => addMessage(payload.new.id, payload.new.username, payload.new.content)
+    (payload) => addMessage(payload.new.id, payload.new.username,
+    payload.new.content)
   )
   .on(
     "postgres_changes",
     { event: "DELETE", schema: "public", table: "chat_messages" },
-    (payload) => document.querySelector(`[data-id='${payload.old.id}']`)?.remove()
+    (payload) => document.querySelector(`[data-id='${payload.old.id}
+    ']`)?.remove()
   )
   .subscribe();
 \end{verbatim}
